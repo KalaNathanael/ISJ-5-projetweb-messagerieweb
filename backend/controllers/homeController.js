@@ -1,7 +1,7 @@
 const User=require('../models/user');
 const Contact=require('../models/contact');
 const Message=require('../models/message');
-const bcrypt=require('bcrypt');
+const bcrypt=require('bcryptjs');
 
 
 exports.home=(req,res,next)=>{
@@ -35,7 +35,8 @@ exports.createUser=(req,res,next)=>{
     user.save().then(
         ()=>{
             res.status(201).json({
-                message:"user added successfull"
+                message:"user added successfull",
+                data: user
             });
         }
    

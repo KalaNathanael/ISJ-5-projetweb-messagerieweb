@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     AppRoutingModule
   ],
