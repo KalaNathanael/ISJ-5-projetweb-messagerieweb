@@ -3,21 +3,22 @@
         <div class="site-background" data-aos="fade-up" data-aos-delay="100">
             <h1 class="text-white">GO Secure Messenger</h1>
             <h2 class="text-white">Amazing Private Secure Web Message</h2>
-            <button class="btn">Explore</button>
+            <a class="btn" [routerLink]="['/home']" fragment="go-block"> Explore</a>
         </div>
     </section>
 
     <!-- --------------------- Block horizontal Carousel ----------------- -->
     <section>
-        <div class="about-go-block" style="padding-top: 10rem;">
+        <div class="about-go-block" id="go-block" style="padding-top: 10rem;">
             <div class="card" style="width: 30rem; padding: 2rem; float: left; margin-left: 5rem;">
                 <img class="card-img-top" src="./assets/img/brand/logo.svg" width="60" height="60"
                     alt="Card image cap" />
                 <div class="card-body">
                     <h5 class="card-title">Go Secure Web Messenger</h5>
                     <p class="card-text">
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
+                        Let's send your message Securely and quickly with <b>Go Secure Messenger </b>
+                        It just take about 1s to inform your neighbour.
+                        There haven't been done yet
                     </p>
                     <a [routerLink]="['/login']" class="btn btn-primary">Explore Go</a>
                 </div>
