@@ -18530,10 +18530,10 @@ main .site-title .btn:hover {
   color: var(--white);
 }
 
-main .blog {
+main .about-go-block {
   background: url("./assets/img/bulles.png");
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: right; 
   height: 100vh;
   width: 100%;
   background-size: 65%;
