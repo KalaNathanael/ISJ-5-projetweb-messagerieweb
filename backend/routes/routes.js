@@ -8,5 +8,6 @@ const controller=require('../controllers/homeController');
    router.get('/',controller.home);
    router.post('/add-user',controller.createUser);
    router.post('/test',controller.test);
+   router.get('/users',controller.allUser);
 
 module.exports = router;

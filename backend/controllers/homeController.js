@@ -17,6 +17,22 @@ exports.test=(req,res,next)=>{
       next();
 };
 
+   exports.allUser=(req,res,next)=>{
+
+       User.find().then(
+           (users)=>{
+               res.status(200).json(users);
+           }
+       ).catch(
+           (error)=>{
+               res.status(400).json(
+                   {error:error}
+               );
+           }
+       );
+
+   };
+
 exports.createUser=(req,res,next)=>{
 
     bcrypt.hash(req.body.password, 10)
