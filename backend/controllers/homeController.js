@@ -1,7 +1,8 @@
 const User=require('../models/user');
 const Contact=require('../models/contact');
 const Message=require('../models/message');
-const bcrypt=require('bcryptjs');
+const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken');
 
 
 exports.home=(req,res,next)=>{
@@ -16,6 +17,58 @@ exports.test=(req,res,next)=>{
       res.json({message:req.body.name});
       next();
 };
+
+   exports.allUser=(req,res,next)=>{
+
+       User.find().then(
+           (users)=>{
+               res.status(200).json(users);
+           }
+       ).catch(
+           (error)=>{
+               res.status(400).json(
+                   {error:error}
+               );
+           }
+       );
+
+   };
+   exports.oneUser=(req,res,next)=>{
+    User.findOne({
+        _id:req.params.id
+    }).then(
+        (user)=>{ res.status(200).json(user);}
+    ).catch(
+          (error)=>{
+              res.status(404).json({error:error});
+          }
+    );
+
+
+
+   };
+
+   exports.login=(req,res,next)=>{
+
+      User.findOne({username:req.body.username}).then(user=>{
+
+        if(!user){
+             return res.status(401).json({error:"user no find"});
+        }
+
+        bcrypt.compare(req.body.password,user.password).then(valid=>{
+            if(!valid){
+                res.status(401).json({error:'password is not correct'});
+            }
+            res.status(200).json({
+                userId:user._id,
+                token:jwt.sign({userId:user._id}, 'RANDOM_TOKEN_SECRET',{expiresIn:'24h'}
+                )
+            });
+        }).catch(error =>res.status(500).json({error}));
+      }).catch(error=>res.status(500).json({error}));
+
+   };
 
 exports.createUser=(req,res,next)=>{
 
