@@ -1,0 +1,132 @@
+<div class="card">
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-success" data-toggle="modal" data-target="#createcontactform"><i class="fa fa-user-plus"></i></button>
+        <button class="btn btn-success"><i class="fa fa-upload"></i></button>
+        <button class="btn btn-success"><i class="fa fa-download"></i></button>
+      </div>
+      <div class="col col-4">
+          <input class="input_search" placeholder="search" name="search" [(ngModel)]="e" (keyup)="searchContact()">
+      </div>
+    </div>
+    <div class="row" id="tableau">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead>
+                  <tr class="first_row_table">
+                    <th>Firstname</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row_table" *ngFor="let contact of contactsFilter; let i=index">
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>
+                      <i class="fa fa-pencil mr-3" data-toggle="modal" data-target="#editcontactform" (click)="editContact(contact)"></i>
+                      <i class="fa fa-trash mr-3" (click)="deleteContact(i)"></i>
+                      <i class="fa fa-comment-o mr-3" data-toggle="modal" data-target="#sendmessageform"></i>
+                    </td>
+  
+                    <!--Start Edit Contact Modal-->
+                    <div class="modal" id="editcontactform">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modifier Contact</h5>
+                          </div>
+                          <div class="modal-body">
+                            <form (ngSubmit)="onEdit(f)" #f="ngForm">
+                                  <div class="row mb-1">
+                                    <div class="col col-4">Nom</div>
+                                    <div class="col"><input type="text" name="name" class="form-control border-secondary" placeholder="Nom...." [value]="name" ngModel></div>
+                                  </div>
+                                  <div class="row mb-1">
+                                    <div class="col col-4">Email</div>
+                                    <div class="col"><input type="email" name="email" class="form-control border-secondary" [value]="email" ngModel></div>
+                                  </div>
+                                  <div class="row mb-1">
+                                    <div class="col col-4">Phone</div>
+                                    <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phone" ngModel></div>
+                                  </div>
+                                  <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
+                            </form>
+                          </div>
+                            
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Edit Modal Contact-->
+  
+                  </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-light border"><i class="fa fa-comments"></i></button>
+        </div>
+    </div>
+    
+    
+  <!--Start Create Contact Modal-->
+  <div class="modal" id="createcontactform" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter Contact</h5>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <div class="row mb-1">
+                  <div class="col col-4">Nom</div>
+                  <div class="col"><input type="text" class="form-control border-secondary" placeholder="Nom...." name="name" ngModel></div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col col-4">Email</div>
+                  <div class="col"><input type="email" class="form-control border-secondary" name="email" ngModel></div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col col-4">Phone</div>
+                  <div class="col"><input type="text" class="form-control border-secondary" name="phone" ngModel></div>
+                </div>
+                <button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>OK</button>
+          </form>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+  <!-- End Create Modal Contact-->
+  
+  
+  <!--Start Send Message Modal-->
+  <div class="modal" id="sendmessageform" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Send Message</h5>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="sendMessage(f)" #f="ngForm">
+                <div class="row mb-1">
+                  <div class="col col-4">Numéro</div>
+                  <div class="col">
+                    <select class="form_control select_form" name="phonenumber" [(ngModel)]="contact_added_to_list" (change)=addContactForm()>
+                      <option *ngFor="let contact of contacts; let i = index" [value]="i">{{ contact.name }}</option>
+                    </select>
+                    <span *ngFor="let c of contacts_added; let j=index;" (click)=deleteListContactsToAdd(j) class="btn list_contact_send">{{ c.name }}</span>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col col-4">Message</div>
+                  <div class="col"><input type="text" row="7" class="form-control border-secondary"></div>
+                </div>
+                <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
+          </form>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+  <!-- End Send Modal Message-->
