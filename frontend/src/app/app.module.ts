@@ -8,6 +8,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     NgbModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

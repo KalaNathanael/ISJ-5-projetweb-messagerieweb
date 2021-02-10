@@ -8,12 +8,19 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
+  registrationGoingOn : boolean;
+
   constructor(private http : HttpClient) {
   }
 
   postUser(user : User){
     const apiToCall = environment.apiUrl + "/add-user";
-    this.http.post<any>(apiToCall, user);
+    this.http.post<any>(apiToCall, user).subscribe(response => {
+      this.registrationGoingOn = false;
+      console.log(response);
+    }, error => {
+      this.registrationGoingOn = false;
+    });
   }
 
 }

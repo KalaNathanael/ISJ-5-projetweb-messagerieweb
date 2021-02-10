@@ -24,56 +24,86 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Nom d'utilisateur" type="text" (focus)="focus3=true"
-                                            (blur)="focus3=false" formControlName="username" >
-                                    </div>
-                                </div>
-                                <div class="form-group" [ngClass]="{'focused':focus===true}">
-                                    <div class="input-group input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Nom" type="text" (focus)="focus=true"
-                                            (blur)="focus=false" formControlName="name" >
-                                    </div>
-                                </div>
-                                <div class="form-group" [ngClass]="{'focused':focus===true}">
-                                    <div class="input-group input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                        </div>
-                                        <input class="form-control" placeholder="Téléphone" type="text" (focus)="focus4=true"
-                                            (blur)="focus4=false" formControlName="phone" >
+                                        <input class="form-control" placeholder="Nom d'utilisateur" type="text" (focus)="focus=true"
+                                            (blur)="focus=false" formControlName="username" >
                                     </div>
                                 </div>
                                 <div class="form-group" [ngClass]="{'focused':focus1===true}">
                                     <div class="input-group input-group-alternative mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" type="email"
-                                            (focus)="focus1=true" (blur)="focus1=false" formControlName="email" >
+                                        <input class="form-control" placeholder="Nom" type="text" (focus)="focus1=true"
+                                            (blur)="focus1=false" formControlName="name" >
                                     </div>
                                 </div>
                                 <div class="form-group" [ngClass]="{'focused':focus2===true}">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Téléphone" type="number" (focus)="focus2=true"
+                                            (blur)="focus2=false" formControlName="phone" >
+                                        <div class="text-muted font-italic" *ngIf="userForm.controls.phone?.status==='INVALID' && userForm.controls.phone.dirty && userForm.controls.phone.touched">
+                                            <small>Attention:
+                                                <span class="text-danger font-weight-700">Le format du numéro n'est pas valide</span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="form-group" [ngClass]="{'focused':focus3===true}">
+                                    <div class="input-group input-group-alternative mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" type="email"
+                                            (focus)="focus3=true" (blur)="focus3=false" formControlName="email" >
+                                        <div class="text-muted font-italic" *ngIf="userForm.controls.email.errors?.email && userForm.controls.email.dirty && userForm.controls.email.touched">
+                                            <small>Attention:
+                                                <span class="text-danger font-weight-700">Le format de l'email n'est pas encore valide</span>
+                                            </small>
+                                        </div>
+                                    </div>                        
+                                </div>
+
+                                <div class="form-group" [ngClass]="{'focused':focus4===true}">
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
                                         <input class="form-control" placeholder="Mot de passe" type="password"
-                                            (focus)="focus2=true" (blur)="focus2=false" formControlName="password" >
+                                            (focus)="focus4=true" (blur)="focus4=false" formControlName="password" >
                                     </div>
                                 </div>
-                                <div class="text-muted font-italic">
-                                    <small>password strength:
-                                        <span class="text-success font-weight-700">strong</span>
+                                <div class="form-group" [ngClass]="{'focused':focus5===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Confirmer mot de passe" type="password"
+                                            (focus)="focus5=true" (blur)="focus5=false" formControlName="confirmPassword" >
+                                    </div>
+                                </div>
+                                <div class="text-muted font-italic" *ngIf="userForm.errors?.doubleCheckPassword && userForm.controls.confirmPassword.dirty && userForm.controls.confirmPassword.touched">
+                                    <small>attention:
+                                        <span class="text-danger font-weight-700">les mots de passe ne correspondent pas</span>
                                     </small>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary mt-4" [disabled]="userForm.invalid" >Create account</button>
+                                    <button type="submit" class="btn btn-primary mt-4" [disabled]="userForm.invalid || userService.registrationGoingOn" >Create account</button>
                                 </div>
                             </form>
+                            <!--loader  -->
+                            <div class="text-center">
+                                <div class="loadingio-spinner-ripple-o89tw7oi4m" *ngIf="userService.registrationGoingOn" ><div class="ldio-em5t878463m">
+                                    <div></div><div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
