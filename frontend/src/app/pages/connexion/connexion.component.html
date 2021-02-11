@@ -19,14 +19,14 @@
                             <div class="text-center text-muted mb-4">
                                 <small>Connectez-vous</small>
                             </div>
-                            <form role="form">
+                            <form role="form" [formGroup]="signForm" (ngSubmit)="onSubmit()" >
                                 <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
                                     <div class="input-group input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
                                         <input class="form-control" placeholder="Username" type="email"
-                                            (focus)="focus=true" (blur)="focus=false">
+                                            (focus)="focus=true" (blur)="focus=false" formControlName="username" >
                                     </div>
                                 </div>
                                 <div class="form-group" [ngClass]="{'focused':focus1===true}">
@@ -35,8 +35,13 @@
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
                                         <input class="form-control" placeholder="Password" type="password"
-                                            (focus)="focus1=true" (blur)="focus1=false">
+                                            (focus)="focus1=true" (blur)="focus1=false" formControlName="password" >
                                     </div>
+                                </div>
+                                <div class="text-muted font-italic" *ngIf="!userService.allowConnexion">
+                                    <small>Attention:
+                                        <span class="text-danger font-weight-700">Username ou mot de passe incorrect</span>
+                                    </small>
                                 </div>
                                 <!-- <div class="custom-control custom-control-alternative custom-checkbox">
                                     <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
@@ -45,18 +50,20 @@
                                     </label>
                                 </div> -->
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary my-4">Sign in</button>
+                                    <button type="submit" class="btn btn-primary my-4" [disabled]="signForm.invalid">Se connecter</button>
                                 </div>
                             </form>
+                            <!-- loader  -->
+                            <div class="text-center">
+                                <div class="loadingio-spinner-ripple-o89tw7oi4m" *ngIf="userService.tryConnexion" ><div class="ldio-em5t878463m">
+                                    <div></div><div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-6">
-                            <a href="javascript:void(0)" class="text-light">
-                                <small>Mot de passe oublié ?</small>
-                            </a>
-                        </div>
-                        <div class="col-6 text-right">
+                        <div class="col-12 text-right">
                             <a [routerLink]="['/register']" class="text-light">
                                 <small>Créer un nouveau compte</small>
                             </a>

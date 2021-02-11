@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConnexionComponent } from './pages/connexion/connexion.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,11 @@ import { ConnexionComponent } from './pages/connexion/connexion.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JwtModule.forRoot({config: {
+      tokenGetter: null
+    }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
