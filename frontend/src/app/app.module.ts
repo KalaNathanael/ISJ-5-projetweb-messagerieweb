@@ -9,6 +9,8 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ConnexionComponent } from './pages/connexion/connexion.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     FooterComponent,
     NavbarComponent,
+    HomePageComponent,
+    ConnexionComponent,
   ],
   imports: [
     BrowserModule,
