@@ -3,15 +3,35 @@ const Contact=require('../models/contact');
 const Message=require('../models/message');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
+const digitCode=require('../services/verificationService');
+const send=require('../services/smsService');
 
 
 exports.home=(req,res,next)=>{
      console.log(req.body);
-    res.json({ message: 'Votre requête a bien été effectue !' });
+  send.sendSMS(req.body.phoneNumber,req.body.message)   ;       
+   // res.json({ message: 'code digit '+code });
      next();
 
 
 };
+
+exports.sms= async(req,res,next)=>{
+    //console.log(req.body);
+    try{
+    send.sendSMS(req.body.phoneNumber,req.body.message);
+    res.status(400).json({message:"message sended"});
+    }
+    catch(error){
+        res.status(400).json(error);
+
+    }
+  // res.json({ message: 'code digit '+code });
+    next();
+
+
+};
+
 exports.test=(req,res,next)=>{
           
       res.json({message:req.body.name});
@@ -55,11 +75,15 @@ exports.test=(req,res,next)=>{
         if(!user){
              return res.status(401).json({error:"user no find"});
         }
-
+           // verifier si la verification par sms et par email est valide
+           
         bcrypt.compare(req.body.password,user.password).then(valid=>{
             if(!valid){
+
                 res.status(401).json({error:'password is not correct'});
             }
+              
+
             res.status(200).json({
                 userId:user._id,
                 token:jwt.sign({userId:user._id}, 'RANDOM_TOKEN_SECRET',{expiresIn:'24h'}
