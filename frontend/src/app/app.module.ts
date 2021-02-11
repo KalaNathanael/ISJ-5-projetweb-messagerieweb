@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ConnexionComponent } from './pages/connexion/connexion.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ContactsComponent } from './contacts/contacts.component';
+import { ContainerComponent } from './container/container.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { JwtModule } from '@auth0/angular-jwt';
     NavbarComponent,
     HomePageComponent,
     ConnexionComponent,
+    ContactsComponent,
+    ContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,7 @@ import { JwtModule } from '@auth0/angular-jwt';
       tokenGetter: null
     }
     }),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

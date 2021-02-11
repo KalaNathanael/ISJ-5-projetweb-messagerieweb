@@ -25,9 +25,15 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/scss/argon.scss"
+              "src/assets/scss/argon.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css",
+              "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -121,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "webproject"
+  "defaultProject": "webproject",
+  "cli": {
+    "analytics": false
+  }
 }
