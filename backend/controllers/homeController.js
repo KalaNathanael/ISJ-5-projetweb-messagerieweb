@@ -1,7 +1,8 @@
 const User=require('../models/user');
 const Contact=require('../models/contact');
 const Message=require('../models/message');
-const bcrypt=require('bcrypt');
+//const bcrypt=require('bcrypt');
+const bcryptjs=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 
 
@@ -56,7 +57,7 @@ exports.test=(req,res,next)=>{
              return res.status(401).json({error:"user no find"});
         }
 
-        bcrypt.compare(req.body.password,user.password).then(valid=>{
+        bcryptjs.compare(req.body.password,user.password).then(valid=>{
             if(!valid){
                 res.status(401).json({error:'password is not correct'});
             }
@@ -72,7 +73,7 @@ exports.test=(req,res,next)=>{
 
 exports.createUser=(req,res,next)=>{
 
-    bcrypt.hash(req.body.password, 10)
+    bcryptjs.hash(req.body.password, 10)
     .then(hash => {
         const user=new User({
       username:req.body.username,
@@ -88,7 +89,8 @@ exports.createUser=(req,res,next)=>{
     user.save().then(
         ()=>{
             res.status(201).json({
-                message:"user added successfull"
+                message:"user added successfull",
+                data: user
             });
         }
    

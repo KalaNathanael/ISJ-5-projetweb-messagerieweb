@@ -1,7 +1,11 @@
+// import express from "express";
+// import bodyParser from "body-parser";
+// import mongoose from "mongoose";
+// import route from "./routes/routes";
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const route=require('./routes/routes')
+const route=require('./routes/routes');
 
 
 
