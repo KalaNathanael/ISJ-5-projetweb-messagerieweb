@@ -82,7 +82,7 @@ export class ContactsComponent implements OnInit {
     this.contacts_added.forEach(
       (contact)=>{
         console.log(contact.name);
-        this.contactServices.sendMessage({phoneNumber:contact.phone, message: form.value.message});
+        this.contactServices.sendMessage({name:contact.name ,phoneNumber:contact.phone, message: form.value.message});
       });
     
   }

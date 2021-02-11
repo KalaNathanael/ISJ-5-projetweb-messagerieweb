@@ -34,7 +34,7 @@
                   </tr>
                 </tbody>
             </table>
-            <button class="btn btn-light border"><i class="fa fa-comments"></i></button>
+            <button class="btn btn-light border" data-toggle="modal" data-target="#sendmessageform"><i class="fa fa-comments"></i></button>
         </div>
     </div>
     
@@ -58,7 +58,7 @@
               </div>
               <div class="row mb-1">
                 <div class="col col-4">Phone</div>
-                <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" ngModel autocomplete="off"></div>
+                <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" pattern="[0-9]{9}" ngModel autocomplete="off"></div>
               </div>
               <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
         </form>
@@ -81,15 +81,15 @@
           <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="row mb-1">
                   <div class="col col-4">Nom</div>
-                  <div class="col"><input type="text" class="form-control border-secondary" name="name" autocomplete="off" ngModel></div>
+                  <div class="col"><input type="text" class="form-control border-secondary" name="name" autocomplete="off" required ngModel></div>
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Email</div>
-                  <div class="col"><input type="email" class="form-control border-secondary" name="email" autocomplete="off" ngModel></div>
+                  <div class="col"><input type="email" class="form-control border-secondary" name="email" autocomplete="off" required ngModel></div>
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Phone</div>
-                  <div class="col"><input type="text" class="form-control border-secondary" name="phone" autocomplete="off" ngModel></div>
+                  <div class="col"><input type="text" class="form-control border-secondary" name="phone" autocomplete="off" pattern="[0-9]{9}" required ngModel></div>
                 </div>
                 <button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>OK</button>
           </form>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Message</div>
-                  <div class="col"><input name="message" type="text" class="form-control border-secondary" ngModel></div>
+                  <div class="col"><input name="message" type="text" class="form-control border-secondary" ngModel required></div>
                 </div>
                 <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
           </form>
@@ -144,7 +144,7 @@
         <form (ngSubmit)="exportContact(export)" #export="ngForm">
               <div class="row mb-1">
                 <div class="col col-4">Fichier</div>
-                <div class="col"><input id="fichier" accept=".csv" type="file" name="files" class="form-control border-secondary" ngModel></div>
+                <div class="col"><input id="fichier" accept=".csv" type="file" name="files" class="form-control border-secondary" ngModel required></div>
               </div>
               <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
         </form>

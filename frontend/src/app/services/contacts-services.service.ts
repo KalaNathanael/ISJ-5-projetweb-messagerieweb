@@ -103,7 +103,7 @@ export class ContactsServicesService {
     this.httpClient.post<any[]>(this.url+"/send-sms", contact, {'headers':this.headers})
         .subscribe(
           (response) => {
-            console.log(response+ "@@@resultat envoi de message");
+            alert("Message envoyé à: "+ response.name);
         },
         (error) => {
         console.log('Error when sending a message ! : ' + error);
