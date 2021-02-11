@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { ContactServices } from './services/contact_services';
 import { FormsModule } from '@angular/forms';
 import { ContainerComponent } from './container/container.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,9 +17,10 @@ import { ContainerComponent } from './container/container.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [ContactServices],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

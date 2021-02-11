@@ -5,7 +5,7 @@
         <button class="btn btn-success"><i class="fa fa-upload"></i></button>
         <button class="btn btn-success"><i class="fa fa-download"></i></button>
       </div>
-      <div class="col col-4">
+      <div class="col">
           <input class="input_search" placeholder="search" name="search" [(ngModel)]="e" (keyup)="searchContact()">
       </div>
     </div>
@@ -14,20 +14,20 @@
             <table class="table table-bordered">
                 <thead>
                   <tr class="first_row_table">
-                    <th>Firstname</th>
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="row_table" *ngFor="let contact of contactsFilter; let i=index">
+                  <tr class="row_table" *ngFor="let contact of contactsFilter;">
                     <td>{{ contact.name }}</td>
                     <td>{{ contact.email }}</td>
                     <td>{{ contact.phone }}</td>
                     <td>
-                      <i class="fa fa-pencil mr-3" data-toggle="modal" data-target="#editcontactform" (click)="editContact(contact)"></i>
-                      <i class="fa fa-trash mr-3" (click)="deleteContact(i)"></i>
+                      <i class="fa fa-pencil mr-3" data-toggle="modal" data-target="#editcontactform" (click)="infoContact(contact)"></i>
+                      <i class="fa fa-trash mr-3" (click)="deleteContact(contact._id)"></i>
                       <i class="fa fa-comment-o mr-3" data-toggle="modal" data-target="#sendmessageform"></i>
                     </td>
   
@@ -39,18 +39,18 @@
                             <h5 class="modal-title" id="exampleModalLabel">Modifier Contact</h5>
                           </div>
                           <div class="modal-body">
-                            <form (ngSubmit)="onEdit(f)" #f="ngForm">
+                            <form (ngSubmit)="editContact(f)" #f="ngForm">
                                   <div class="row mb-1">
                                     <div class="col col-4">Nom</div>
-                                    <div class="col"><input type="text" name="name" class="form-control border-secondary" placeholder="Nom...." [value]="name" ngModel></div>
+                                    <div class="col"><input type="text" name="name" class="form-control border-secondary"  [value]="nameContact" ngModel></div>
                                   </div>
                                   <div class="row mb-1">
                                     <div class="col col-4">Email</div>
-                                    <div class="col"><input type="email" name="email" class="form-control border-secondary" [value]="email" ngModel></div>
+                                    <div class="col"><input type="email" name="email" class="form-control border-secondary" [value]="emailContact" ngModel></div>
                                   </div>
                                   <div class="row mb-1">
                                     <div class="col col-4">Phone</div>
-                                    <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phone" ngModel></div>
+                                    <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" ngModel></div>
                                   </div>
                                   <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
                             </form>
@@ -80,7 +80,7 @@
           <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="row mb-1">
                   <div class="col col-4">Nom</div>
-                  <div class="col"><input type="text" class="form-control border-secondary" placeholder="Nom...." name="name" ngModel></div>
+                  <div class="col"><input type="text" class="form-control border-secondary" name="name" ngModel></div>
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Email</div>
@@ -108,7 +108,7 @@
           <h5 class="modal-title" id="exampleModalLabel">Send Message</h5>
         </div>
         <div class="modal-body">
-          <form (ngSubmit)="sendMessage(f)" #f="ngForm">
+          <form (ngSubmit)="sendMessage(sendmessage)" #sendmessage="ngForm">
                 <div class="row mb-1">
                   <div class="col col-4">Numéro</div>
                   <div class="col">
@@ -120,7 +120,7 @@
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Message</div>
-                  <div class="col"><input type="text" row="7" class="form-control border-secondary"></div>
+                  <div class="col"><input name="message" type="text" class="form-control border-secondary" ngModel></div>
                 </div>
                 <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
           </form>

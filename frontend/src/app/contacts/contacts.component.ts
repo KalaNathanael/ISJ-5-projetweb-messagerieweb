@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ContactServices } from '../services/contact_services';
+import { ContactsServicesService } from '../services/contacts-services.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import { HttpClient, HttpHeaders}  from '@angular/common/http';
 declare  var jQuery:  any;
 
 @Component({
@@ -17,17 +18,22 @@ export class ContactsComponent implements OnInit {
   p: boolean;
   contactSubscription: Subscription;
   contactaddSubscription: Subscription;
-  @Input() name;
-  @Input() email;
-  @Input() phone;
+  @Input() nameContact;
+  @Input() emailContact;
+  @Input() phoneContact;
+  @Input() idContact;
+  @Input() userContact;
 
   @Input() e;
   @Input() contact_added_to_list;
-  contactsFilter: any[];
+  contactsFilter;
+  headers= new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDE1MzRiNThmYjQyOTVlMTQ5NjBlODEiLCJpYXQiOjE2MTI5ODYxMzQsImV4cCI6MTYxMzA3MjUzNH0.J0rGCzptAregnv1amRhbWEdQZHWEoIrMclb4sWl5f9M');
 
-  constructor(private contactServices: ContactServices) { }
 
-  ngOnInit(): void {
+  constructor(private httpClient: HttpClient, private contactServices: ContactsServicesService) { }
+
+  ngOnInit(): void {   
+    this.contactServices.listContacts();
     this.contactSubscription = this.contactServices.contactsSubject.subscribe(
       (contacts: any[])=>{
         this.contacts = contacts;
@@ -39,43 +45,41 @@ export class ContactsComponent implements OnInit {
         this.contacts_added = contacts_added;
       }
     );
-    this.contactServices.emitContactSubject();
     this.contactServices.emitContactAddSubject();
   }
 
-  editContact(contact){
-    this.name = contact.name;
-    this.email = contact.email;
-    this.phone = contact.phone;
+  infoContact(contact){
+    this.nameContact = contact.name;
+    this.emailContact = contact.email;
+    this.phoneContact = contact.phone;
+    this.idContact = contact._id;
     this.contactServices.emitContactSubject();
   }
 
-  onEdit(form: NgForm){
-    let i=0;
-    for(let contact of this.contactServices.contacts){
-      if(contact.name==this.name){
-        console.log(this.name+"@@@");
-        this.contactEdit = {
-          name: form.value.name,
-          email: form.value.email,
-          phone: form.value.phone
-        }
-        console.log(form.value.name+"##")
-        this.contactServices.contacts.splice(i,1,this.contactEdit);
-        this.contactServices.emitContactSubject();
-        (function ($) {
-          $(document).ready(function(){
-            $('#editcontactform').modal('hide');
-          });
-        })(jQuery);
-      }
-      i++;
+  editContact(form: NgForm){
+    this.nameContact = (form.value.name) ? form.value.name : this.nameContact;
+    this.emailContact = (form.value.email) ? form.value.email : this.emailContact;
+    this.phoneContact = (form.value.phone) ? form.value.phone : this.phoneContact;
+    this.contactEdit = {
+      name: this.nameContact,
+      email: this.emailContact,
+      phone: this.phoneContact,
+      id: this.idContact,
+      user: this.contactServices.userId
     }
+    this.contactServices.updateContact(this.contactEdit)
+    this.contactServices.emitContactSubject();
+    (function ($) {
+      $(document).ready(function(){
+        $('#editcontactform').modal('hide');
+      });
+    })(jQuery);
   }
 
 
   sendMessage(form: NgForm){
-    console.log(form.value.phonenumber);
+    console.log(form.value.message +"#####");
+    this.contacts_added.forEach((contact)=>{console.log(contact.name);});
   }
 
   deleteContact(index){
@@ -125,7 +129,8 @@ export class ContactsComponent implements OnInit {
     let contact={
       name: form.value.name,
       email: form.value.email,
-      phone: form.value.phone
+      phone: form.value.phone,
+      user: this.contactServices.userId
     };
     this.contactServices.addContact(contact);
     
