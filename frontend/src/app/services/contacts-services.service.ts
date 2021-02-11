@@ -100,7 +100,7 @@ export class ContactsServicesService {
 
 
   sendMessage(contact){
-    this.httpClient.post<any[]>(this.url+"/send-sms"+contact, {'headers':this.headers})
+    this.httpClient.post<any[]>(this.url+"/send-sms", contact, {'headers':this.headers})
         .subscribe(
           (response) => {
             console.log(response+ "@@@resultat envoi de message");

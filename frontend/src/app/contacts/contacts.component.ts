@@ -147,6 +147,10 @@ export class ContactsComponent implements OnInit {
         
   }
 
+  exportContact(form: NgForm){
+    console.log(form.value.files+ "@@import de contact")
+  }
+
   ngOnDestroy(){
     this.contactSubscription.unsubscribe();
   }

@@ -21,7 +21,7 @@ exports.sms= async(req,res,next)=>{
     //console.log(req.body);
     try{
     send.sendSMS(req.body.phoneNumber,req.body.message);
-    res.status(400).json({message:"message sended"});
+    res.status(200).json({message:"message sended"});
     }
     catch(error){
         res.status(400).json(error);

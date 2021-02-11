@@ -2,11 +2,11 @@
     <div class="row">
       <div class="col">
         <button class="btn btn-success" data-toggle="modal" data-target="#createcontactform"><i class="fa fa-user-plus"></i></button>
-        <button class="btn btn-success"><i class="fa fa-upload"></i></button>
+        <button class="btn btn-success" data-toggle="modal" data-target="#exportcontactform"><i class="fa fa-upload"></i></button>
         <button class="btn btn-success"><i class="fa fa-download"></i></button>
       </div>
       <div class="col">
-          <input class="input_search" placeholder="search" name="search" [(ngModel)]="e" (keyup)="searchContact()">
+          <input class="input_search" placeholder="search" name="search" [(ngModel)]="e" (keyup)="searchContact()" autocomplete="off">
       </div>
     </div>
     <div class="row" id="tableau">
@@ -50,15 +50,15 @@
         <form (ngSubmit)="editContact(edit)" #edit="ngForm">
               <div class="row mb-1">
                 <div class="col col-4">Nom</div>
-                <div class="col"><input type="text" name="name" class="form-control border-secondary"  [value]="nameContact" ngModel></div>
+                <div class="col"><input type="text" name="name" class="form-control border-secondary"  [value]="nameContact" ngModel autocomplete="off"></div>
               </div>
               <div class="row mb-1">
                 <div class="col col-4">Email</div>
-                <div class="col"><input type="email" name="email" class="form-control border-secondary" [value]="emailContact" ngModel></div>
+                <div class="col"><input type="email" name="email" class="form-control border-secondary" [value]="emailContact" ngModel autocomplete="off"></div>
               </div>
               <div class="row mb-1">
                 <div class="col col-4">Phone</div>
-                <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" ngModel></div>
+                <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" ngModel autocomplete="off"></div>
               </div>
               <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
         </form>
@@ -81,15 +81,15 @@
           <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="row mb-1">
                   <div class="col col-4">Nom</div>
-                  <div class="col"><input type="text" class="form-control border-secondary" name="name" ngModel></div>
+                  <div class="col"><input type="text" class="form-control border-secondary" name="name" autocomplete="off" ngModel></div>
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Email</div>
-                  <div class="col"><input type="email" class="form-control border-secondary" name="email" ngModel></div>
+                  <div class="col"><input type="email" class="form-control border-secondary" name="email" autocomplete="off" ngModel></div>
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Phone</div>
-                  <div class="col"><input type="text" class="form-control border-secondary" name="phone" ngModel></div>
+                  <div class="col"><input type="text" class="form-control border-secondary" name="phone" autocomplete="off" ngModel></div>
                 </div>
                 <button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>OK</button>
           </form>
@@ -131,3 +131,26 @@
     </div>
   </div>
   <!-- End Send Modal Message-->
+
+
+  <!--Start Export Contact Modal-->
+<div class="modal" id="exportcontactform">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Exporter Contact</h5>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="exportContact(export)" #export="ngForm">
+              <div class="row mb-1">
+                <div class="col col-4">Fichier</div>
+                <div class="col"><input id="fichier" accept=".csv" type="file" name="files" class="form-control border-secondary" ngModel></div>
+              </div>
+              <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
+        </form>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!-- End Edit Modal Contact-->
