@@ -10,6 +10,8 @@ export class ContactsServicesService {
 
   constructor(private httpClient: HttpClient, public userService : UserService) {
     this.userId = userService.activeUserId;
+    this.token = userService.userToken;
+    this.headers= new HttpHeaders().set('Authorization', 'Bearer '+this.token);
   }
 
   url="http://localhost:3000/api";
@@ -21,8 +23,9 @@ export class ContactsServicesService {
   contacts;
   contacts_added=[];
   contactsFilter;
-  token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDE1MzRiNThmYjQyOTVlMTQ5NjBlODEiLCJpYXQiOjE2MTI5ODYxMzQsImV4cCI6MTYxMzA3MjUzNH0.J0rGCzptAregnv1amRhbWEdQZHWEoIrMclb4sWl5f9M';
-  headers= new HttpHeaders().set('Authorization', 'Bearer '+this.token);
+  compteurMessage=15;
+  token : String;
+  headers;
 
   
   emitContactSubject(){
@@ -39,7 +42,7 @@ export class ContactsServicesService {
   
 
   listContacts(){
-    this.httpClient.get("http://localhost:3000/api/contacts/" + this.userId, {'headers':this.headers})
+    this.httpClient.get("http://localhost:3000/api/contacts/"+this.userId, {'headers':this.headers})
       .subscribe(
         (data) => {
           console.log("enter]]");
@@ -93,5 +96,18 @@ export class ContactsServicesService {
       }
     );
     }
+  }
+
+
+  sendMessage(contact){
+    this.httpClient.post<any[]>(this.url+"/send-sms", contact, {'headers':this.headers})
+        .subscribe(
+          (response) => {
+            console.log(response+ "@@@resultat envoi de message");
+        },
+        (error) => {
+        console.log('Error when sending a message ! : ' + error);
+      }
+    );
   }
 }

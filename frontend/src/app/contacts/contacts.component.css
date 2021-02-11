@@ -60,8 +60,17 @@ box-shadow:  1px 1px 3px #b8b8b8,
 margin-left:30px;
 }
 
+#fichier{
+    border:0;
+    padding:15px;
+    height:56px;
+    background:rgb(255,255,255);
+    box-shadow:  1px 1px 3px #b8b8b8, 
+                    -1px -1px 3px #ffffff;
+    margin-left:30px;
+    }
+
 .table-bordered{
-width:1040px;
 border:0;
 background:white;
 box-shadow:1px 2px 5px rgba(0,0,0,0.2);
