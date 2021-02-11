@@ -17,6 +17,7 @@ export class UserService {
   usernameEnregistrated : String = "";
   isAuth : boolean = false;
   activeUserId : String;
+  userToken : String;
   activeUser : User;
 
   constructor(private http : HttpClient, private jwtHelperService: JwtHelperService, private route : Router) {
@@ -40,6 +41,7 @@ export class UserService {
       this.serverConnexionLost = false;
       this.tryConnexion = false;
       if(!response.error){
+        this.userToken = response.token;
         // decode token to read the payload details
         let decodeToken = this.jwtHelperService.decodeToken(response.token);
         console.log(decodeToken);

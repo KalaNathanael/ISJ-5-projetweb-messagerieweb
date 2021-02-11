@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { UserService } from '../_services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsServicesService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, public userService : UserService) {
+    this.userId = userService.activeUserId;
+    this.token = userService.userToken;
+    this.headers= new HttpHeaders().set('Authorization', 'Bearer '+this.token);
+  }
 
   url="http://localhost:3000/api";
-  userId="602441c4b9c1e1476851ba19";
+  userId : String;
   contactsSubject = new Subject<any[]>();
   contactsaddSubject = new Subject<any[]>();
   contactsFilterSubject = new Subject<any[]>();
@@ -19,8 +24,8 @@ export class ContactsServicesService {
   contacts_added=[];
   contactsFilter;
   compteurMessage=15;
-  token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDE1MzRiNThmYjQyOTVlMTQ5NjBlODEiLCJpYXQiOjE2MTI5ODYxMzQsImV4cCI6MTYxMzA3MjUzNH0.J0rGCzptAregnv1amRhbWEdQZHWEoIrMclb4sWl5f9M';
-  headers= new HttpHeaders().set('Authorization', 'Bearer '+this.token);
+  token : String;
+  headers;
 
   
   emitContactSubject(){
@@ -37,7 +42,7 @@ export class ContactsServicesService {
   
 
   listContacts(){
-    this.httpClient.get("http://localhost:3000/api/contacts/601534b58fb4295e14960e81", {'headers':this.headers})
+    this.httpClient.get("http://localhost:3000/api/contacts/"+this.userId, {'headers':this.headers})
       .subscribe(
         (data) => {
           console.log("enter]]");
