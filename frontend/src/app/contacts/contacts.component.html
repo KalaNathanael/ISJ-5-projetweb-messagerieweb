@@ -58,7 +58,7 @@
               </div>
               <div class="row mb-1">
                 <div class="col col-4">Phone</div>
-                <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" ngModel autocomplete="off"></div>
+                <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" pattern="[0-9]{9}" ngModel autocomplete="off"></div>
               </div>
               <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
         </form>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="row mb-1">
                   <div class="col col-4">Phone</div>
-                  <div class="col"><input type="text" class="form-control border-secondary" name="phone" autocomplete="off" ngModel></div>
+                  <div class="col"><input type="text" class="form-control border-secondary" name="phone" pattern="[0-9]{9}" autocomplete="off" ngModel></div>
                 </div>
                 <button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i>OK</button>
           </form>
