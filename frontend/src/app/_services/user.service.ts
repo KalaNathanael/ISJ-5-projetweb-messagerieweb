@@ -15,6 +15,9 @@ export class UserService {
   tryConnexion : boolean;
   serverConnexionLost : boolean = false;
   usernameEnregistrated : String = "";
+  isAuth : boolean = false;
+  activeUserId : String;
+  activeUser : User;
 
   constructor(private http : HttpClient, private jwtHelperService: JwtHelperService, private route : Router) {
   }
@@ -45,8 +48,11 @@ export class UserService {
         if (!decodeToken) {
           return false;
         }
-
+        this.activeUserId = decodeToken.userId;
+        this.getActiveUser(this.activeUserId);
+        this.isAuth = true;
         this.allowConnexion = true;
+        this.route.navigate(['/contact']);
       }else{
         this.allowConnexion = false;
       }
@@ -54,6 +60,14 @@ export class UserService {
       this.tryConnexion = false;
       this.allowConnexion = false;
       this.serverConnexionLost = true;
+    })
+  }
+
+  getActiveUser(id : String){
+    const apiToCall = environment.apiUrl + "/user/"+ id;
+    this.http.get<any>(apiToCall).subscribe(response => {
+        let user = new User(response.name, response.username, response.phone, response.email, response.password);
+        this.activeUser = user;
     })
   }
 
