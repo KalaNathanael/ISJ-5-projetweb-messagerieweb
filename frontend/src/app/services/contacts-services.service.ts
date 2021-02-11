@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { UserService } from '../_services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactsServicesService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, public userService : UserService) {
+    this.userId = userService.activeUserId;
+  }
 
   url="http://localhost:3000/api";
-  userId="601534b58fb4295e14960e81";
+  userId : String;
   contactsSubject = new Subject<any[]>();
   contactsaddSubject = new Subject<any[]>();
   contactsFilterSubject = new Subject<any[]>();
@@ -36,7 +39,7 @@ export class ContactsServicesService {
   
 
   listContacts(){
-    this.httpClient.get("http://localhost:3000/api/contacts/601534b58fb4295e14960e81", {'headers':this.headers})
+    this.httpClient.get("http://localhost:3000/api/contacts/" + this.userId, {'headers':this.headers})
       .subscribe(
         (data) => {
           console.log("enter]]");
