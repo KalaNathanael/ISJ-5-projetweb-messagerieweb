@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* loader style*/
+@keyframes ldio-em5t878463m {
+    0% {
+      top: 48px;
+      left: 48px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 9px;
+      left: 9px;
+      width: 78px;
+      height: 78px;
+      opacity: 0;
+    }
+  }
+  
+  .ldio-em5t878463m div {
+    position: absolute;
+    border-width: 2px;
+    border-style: solid;
+    opacity: 1;
+    border-radius: 50%;
+    animation: ldio-em5t878463m 1s cubic-bezier(0,0.2,0.8,1) infinite;
+  }
+  
+  .ldio-em5t878463m div:nth-child(1) {
+    border-color: #d58936
+  }
+  
+  .ldio-em5t878463m div:nth-child(2) {
+    border-color: #183059;
+    animation-delay: -0.5s;
+  }
+  
+  .loadingio-spinner-ripple-o89tw7oi4m {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    overflow: hidden;
+    background: #f1f2f3;
+  }
+  .ldio-em5t878463m {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(0.5);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+  }
+  .ldio-em5t878463m div { box-sizing: content-box; }
