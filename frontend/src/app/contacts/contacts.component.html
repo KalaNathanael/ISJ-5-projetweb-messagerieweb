@@ -31,36 +31,6 @@
                       <i class="fa fa-comment-o mr-3" data-toggle="modal" data-target="#sendmessageform"></i>
                     </td>
   
-                    <!--Start Edit Contact Modal-->
-                    <div class="modal" id="editcontactform">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modifier Contact</h5>
-                          </div>
-                          <div class="modal-body">
-                            <form (ngSubmit)="editContact(f)" #f="ngForm">
-                                  <div class="row mb-1">
-                                    <div class="col col-4">Nom</div>
-                                    <div class="col"><input type="text" name="name" class="form-control border-secondary"  [value]="nameContact" ngModel></div>
-                                  </div>
-                                  <div class="row mb-1">
-                                    <div class="col col-4">Email</div>
-                                    <div class="col"><input type="email" name="email" class="form-control border-secondary" [value]="emailContact" ngModel></div>
-                                  </div>
-                                  <div class="row mb-1">
-                                    <div class="col col-4">Phone</div>
-                                    <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" ngModel></div>
-                                  </div>
-                                  <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
-                            </form>
-                          </div>
-                            
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Edit Modal Contact-->
-  
                   </tr>
                 </tbody>
             </table>
@@ -68,6 +38,37 @@
         </div>
     </div>
     
+
+<!--Start Edit Contact Modal-->
+<div class="modal" id="editcontactform">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier Contact</h5>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="editContact(edit)" #edit="ngForm">
+              <div class="row mb-1">
+                <div class="col col-4">Nom</div>
+                <div class="col"><input type="text" name="name" class="form-control border-secondary"  [value]="nameContact" ngModel></div>
+              </div>
+              <div class="row mb-1">
+                <div class="col col-4">Email</div>
+                <div class="col"><input type="email" name="email" class="form-control border-secondary" [value]="emailContact" ngModel></div>
+              </div>
+              <div class="row mb-1">
+                <div class="col col-4">Phone</div>
+                <div class="col"><input type="text" name="phone" class="form-control border-secondary" [value]="phoneContact" ngModel></div>
+              </div>
+              <br><br><button type="button" class="btn btn-primary" type="submit"><i class="fa fa-check"></i> OK</button>
+        </form>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!-- End Edit Modal Contact-->
+
     
   <!--Start Create Contact Modal-->
   <div class="modal" id="createcontactform" tabindex="-1" aria-labelledby="exampleModalLabel">

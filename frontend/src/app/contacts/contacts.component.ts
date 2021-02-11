@@ -27,7 +27,7 @@ export class ContactsComponent implements OnInit {
   @Input() e;
   @Input() contact_added_to_list;
   contactsFilter;
-  headers= new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDE1MzRiNThmYjQyOTVlMTQ5NjBlODEiLCJpYXQiOjE2MTI5ODYxMzQsImV4cCI6MTYxMzA3MjUzNH0.J0rGCzptAregnv1amRhbWEdQZHWEoIrMclb4sWl5f9M');
+  headers= new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDI0NDFjNGI5YzFlMTQ3Njg1MWJhMTkiLCJpYXQiOjE2MTMwMzU5NzgsImV4cCI6MTYxMzEyMjM3OH0.QbCDf4Opm0q8Q5AflLVwglwfhT7FZ48NOzJAofsEiEo');
 
 
   constructor(private httpClient: HttpClient, private contactServices: ContactsServicesService) { }
@@ -79,7 +79,12 @@ export class ContactsComponent implements OnInit {
 
   sendMessage(form: NgForm){
     console.log(form.value.message +"#####");
-    this.contacts_added.forEach((contact)=>{console.log(contact.name);});
+    this.contacts_added.forEach(
+      (contact)=>{
+        console.log(contact.name);
+        this.contactServices.sendMessage({phoneNumber:contact.phone, message: form.value.message});
+      });
+    
   }
 
   deleteContact(index){

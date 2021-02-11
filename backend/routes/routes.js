@@ -12,7 +12,7 @@ const auth=require('../middlewares/auth');
    router.get('/',controller.home);
    //router.post('/testSMS',controller.sms);
 
-  router.post('/send-sms',auth,smsController.sendSms);
+   router.post('/send-sms',auth,smsController.sendSms);
    router.post('/add-user',controller.createUser);
    router.post('/test',controller.test);
    router.get('/users',auth,controller.allUser);
